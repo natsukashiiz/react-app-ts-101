@@ -48,7 +48,7 @@ export default function FetchInfinity() {
     }, []);
 
     const handleScroll = () => {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || page === (max + 1) || isLoading) {
+        if (window.innerHeight + document.documentElement.scrollTop <= document.documentElement.offsetHeight - 10 || page === (max + 1) || isLoading) {
             return;
         }
         fetchData();

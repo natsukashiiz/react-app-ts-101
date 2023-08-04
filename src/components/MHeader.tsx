@@ -3,6 +3,7 @@ import { Header } from 'antd/es/layout/layout';
 import type { MenuProps } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import logo from '../assets/vite.svg';
 
 export default function MHeader() {
     const navigate = useNavigate();
@@ -26,9 +27,41 @@ export default function MHeader() {
             key: 'fetch-infinity',
             label: 'Fetch Infinity',
         },
+        {
+            key: 'tech',
+            label: 'Tech',
+            children: [
+                {
+                    key: 'tech/vite',
+                    label: (
+                        <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer">Vite</a>
+                    ),
+                },
+                {
+                    key: 'tech/react',
+                    label: (
+                        <a href="https://react.dev/" target="_blank" rel="noopener noreferrer">React</a>
+                    ),
+                },
+                {
+                    key: 'tech/ts',
+                    label: (
+                        <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer">TypeScript</a>
+
+                    ),
+                },
+                {
+                    key: 'tech/antd',
+                    label: (
+                        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Ant Design</a>
+                    ),
+                }
+            ]
+        }
     ];
 
     const onClick: MenuProps['onClick'] = (e) => {
+        if (e.key.startsWith('tech/')) return;
         navigate(`/${e.key}`);
     };
 
@@ -46,9 +79,10 @@ export default function MHeader() {
             width: '100%',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             backgroundColor: '#fff',
         }}>
+            <img src={logo} alt="logo" />
             <Menu
                 mode="horizontal"
                 items={menuItem}

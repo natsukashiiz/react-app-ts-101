@@ -8,6 +8,7 @@ import User from "../pages/admin/User";
 import AdminLayout from "../layouts/AdminLayout";
 import SignIn from "../pages/SignIn";
 import FetchInfinity from "../pages/FetchInfinity";
+import SignUp from "../pages/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: "sign-in",
                 element: <SignIn />,
+            },
+            {
+                path: "sign-up",
+                element: <SignUp />,
             },
             {
                 path: "fetch-infinity",
