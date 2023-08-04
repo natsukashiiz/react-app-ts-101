@@ -23,8 +23,8 @@ export default function MHeader() {
             label: 'Contact',
         },
         {
-            key: 'fetch',
-            label: 'Fetch',
+            key: 'fetch-infinity',
+            label: 'Fetch Infinity',
         },
     ];
 
@@ -47,9 +47,9 @@ export default function MHeader() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            backgroundColor: '#fff',
         }}>
             <Menu
-                theme="dark"
                 mode="horizontal"
                 items={menuItem}
                 selectedKeys={[current]}

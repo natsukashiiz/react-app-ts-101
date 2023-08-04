@@ -7,7 +7,7 @@ import Admin from "../pages/admin/Admin";
 import User from "../pages/admin/User";
 import AdminLayout from "../layouts/AdminLayout";
 import SignIn from "../pages/SignIn";
-import Fetch from "../pages/Fetch";
+import FetchInfinity from "../pages/FetchInfinity";
 
 const router = createBrowserRouter([
     {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
                 element: <SignIn />,
             },
             {
-                path: "fetch",
-                element: <Fetch />,
+                path: "fetch-infinity",
+                element: <FetchInfinity />,
             },
         ]
     },

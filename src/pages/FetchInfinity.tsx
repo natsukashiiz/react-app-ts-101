@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import MBlog from "../components/MBlog";
 
-export default function Fetch() {
+export default function FetchInfinity() {
 
     const navigate = useNavigate();
     const location = useLocation();
