@@ -22,6 +22,10 @@ export default function MHeader() {
             key: 'contact',
             label: 'Contact',
         },
+        {
+            key: 'fetch',
+            label: 'Fetch',
+        },
     ];
 
     const onClick: MenuProps['onClick'] = (e) => {

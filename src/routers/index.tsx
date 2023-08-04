@@ -7,6 +7,7 @@ import Admin from "../pages/admin/Admin";
 import User from "../pages/admin/User";
 import AdminLayout from "../layouts/AdminLayout";
 import SignIn from "../pages/SignIn";
+import Fetch from "../pages/Fetch";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
             {
                 path: "sign-in",
                 element: <SignIn />,
-            }
+            },
+            {
+                path: "fetch",
+                element: <Fetch />,
+            },
         ]
     },
     {

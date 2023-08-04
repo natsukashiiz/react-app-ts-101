@@ -1,7 +1,7 @@
 import { Card, Space, Avatar } from "antd";
 
 type Props = {
-    data: IBlog;
+    data: IPost;
 };
 
 export default function MBlog({ data }: Props) {
@@ -11,8 +11,9 @@ export default function MBlog({ data }: Props) {
                 <Avatar style={{ backgroundColor: '#f56a00' }}>N</Avatar> • {new Date().toLocaleDateString()}
             </Space>
         }>
-            <h2>{data.title}</h2>
-            <p>{data.content}</p>
+            <h2>{data.id}</h2>
+            <h3>{data.title}</h3>
+            <p>{data.body}</p>
         </Card>
     );
 }
