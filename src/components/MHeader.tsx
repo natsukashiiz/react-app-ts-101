@@ -2,33 +2,42 @@ import { Button, Menu, Space } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import type { MenuProps } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import logo from '../assets/vite.svg';
+import { useState } from 'react';
 
 export default function MHeader() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const [current, setCurrent] = useState<string>('');
+    const { pathname } = useLocation();
 
-    const menuItem: MenuProps['items'] = [
+    const [token] = useState<string | null>(localStorage.getItem("token") || null);
+
+    type MenuItem = Required<MenuProps>['items'][number];
+
+    type MenuItemWithAuth = MenuItem & {
+        auth?: boolean;
+        children?: MenuItemWithAuth[];
+    };
+
+    const menuItem: MenuItemWithAuth[] = [
         {
-            key: '',
+            key: '/',
             label: 'Home',
         },
         {
-            key: 'about',
+            key: '/about',
             label: 'About',
         },
         {
-            key: 'contact',
+            key: '/contact',
             label: 'Contact',
         },
         {
-            key: 'fetch-infinity',
+            key: '/fetch-infinity',
             label: 'Fetch Infinity',
+            auth: true,
         },
         {
-            key: 'tech',
+            key: '/tech',
             label: 'Tech',
             children: [
                 {
@@ -57,19 +66,33 @@ export default function MHeader() {
                     ),
                 }
             ]
+        },
+        {
+            key: '/admin',
+            label: 'Admin',
+            auth: true,
+            children: [
+                {
+                    key: '/admin',
+                    label: 'Home',
+                }, {
+                    key: '/admin/user',
+                    label: 'User',
+                }
+            ]
         }
     ];
 
     const onClick: MenuProps['onClick'] = (e) => {
         if (e.key.startsWith('tech/')) return;
-        navigate(`/${e.key}`);
+        navigate(e.key);
     };
 
-    useEffect(() => {
-        const path = location.pathname;
-        const key = path.replace('/', '');
-        setCurrent(key);
-    }, [location]);
+    function onLogout() {
+        localStorage.removeItem('token');
+        // navigate('/sign-in');
+        window.location.href = '/sign-in';
+    }
 
     return (
         <Header style={{
@@ -85,14 +108,17 @@ export default function MHeader() {
             <img src={logo} alt="logo" />
             <Menu
                 mode="horizontal"
-                items={menuItem}
-                selectedKeys={[current]}
+                items={menuItem.filter(item => !item.auth || token)}
+                selectedKeys={[pathname]}
                 onClick={onClick}
             />
-            <Space>
-                <Button type="default" onClick={() => navigate('/sign-in')}>Sign In</Button>
-                <Button type="primary" onClick={() => navigate('/sign-up')}>Create account</Button>
-            </Space>
+            {token ?
+                <Button type="default" onClick={onLogout}>Logout</Button> :
+                <Space>
+                    <Button type="default" onClick={() => navigate('/sign-in')}>Sign In</Button>
+                    <Button type="primary" onClick={() => navigate('/sign-up')}>Create account</Button>
+                </Space>
+            }
         </Header>
     );
 }

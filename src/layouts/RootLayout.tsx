@@ -1,10 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import MFooter from "../components/MFooter";
 import MHeader from "../components/MHeader";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
+import { useEffect } from "react";
 
 export default function RootLayout() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
     return (
         <Layout>
             <MHeader />
