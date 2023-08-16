@@ -10,7 +10,7 @@ export default function SignUp() {
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    const onFinish = (form: ISignIn) => {
+    const onFinish = (form: ISignUp) => {
         setLoading(true);
         message.open({
             key,
@@ -18,27 +18,24 @@ export default function SignUp() {
             content: 'Loading...',
         });
         setTimeout(() => {
-            setTimeout(() => {
-                if (form.username === 'vv12' && form.password === '12345678') {
-                    localStorage.setItem("token", "admin");
-                    message.open({
-                        key,
-                        type: 'success',
-                        content: "Login success",
-                        duration: 1
-                    });
-                    setLoading(false);
-                    navigate("/admin");
-                } else {
-                    message.open({
-                        key,
-                        type: 'error',
-                        content: "Username or password is incorrect",
-                        duration: 2
-                    });
-                    setLoading(false);
-                }
-            }, 1000);
+            if (form.password !== form.repassword) {
+                message.open({
+                    key,
+                    type: 'error',
+                    content: "Password and Repassword is not match",
+                    duration: 2
+                });
+                setLoading(false);
+            } else {
+                message.open({
+                    key,
+                    type: 'success',
+                    content: "Create account success",
+                    duration: 1
+                });
+                setLoading(false);
+                navigate("/sign-in");
+            }
         }, 1000);
     };
 
@@ -48,7 +45,7 @@ export default function SignUp() {
 
     return (
         <center>
-            <Card title="Create account" style={{ width: 500 }}>
+            <Card title="Create account" style={{ maxWidth: 500 }}>
                 <Form
                     name="basic"
                     style={{ maxWidth: 300 }}

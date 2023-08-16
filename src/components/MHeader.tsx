@@ -16,6 +16,7 @@ export default function MHeader() {
 
     type MenuItemWithAuth = MenuItem & {
         auth?: boolean;
+        mobile?: boolean;
         children?: MenuItemWithAuth[];
     };
 
@@ -35,7 +36,6 @@ export default function MHeader() {
         {
             key: '/fetch-infinity',
             label: 'Fetch Infinity',
-            auth: true,
         },
         {
             key: '/none/tech',
@@ -91,10 +91,12 @@ export default function MHeader() {
         {
             key: '/sign-in',
             label: 'Sign In',
+            mobile: true,
         },
         {
             key: '/sign-up',
             label: 'Sign Up',
+            mobile: true,
         }
     ];
 
@@ -110,6 +112,7 @@ export default function MHeader() {
     }
 
     const menuFilter = menuItem.filter(item => !item.auth || token);
+    const menuMobile = menuFilter.filter(item => !item.mobile || token);
 
     return (
         <Header style={{
@@ -123,14 +126,14 @@ export default function MHeader() {
             backgroundColor: '#fff',
             borderBottom: '1px solid #f0f0f0',
         }}>
-            {!isMobile && <img src={logo} alt="logo" />}
+            {/* {!isMobile && <img src={logo} alt="logo" />} */}
             {isMobile
                 ? <Dropdown.Button menu={{ items: menuFilter, onClick: onClick }} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                     {token ? 'ADMIN' : 'MENU'}
                 </Dropdown.Button>
                 : <Menu
                     mode="horizontal"
-                    items={menuFilter}
+                    items={menuMobile}
                     selectedKeys={[pathname]}
                     onClick={onClick}
                     style={{

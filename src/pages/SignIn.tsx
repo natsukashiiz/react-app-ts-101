@@ -18,27 +18,25 @@ export default function SignIn() {
             content: 'Loading...',
         });
         setTimeout(() => {
-            setTimeout(() => {
-                if (form.username === 'vv12' && form.password === '12345678') {
-                    localStorage.setItem("token", "admin");
-                    message.open({
-                        key,
-                        type: 'success',
-                        content: "Login success",
-                        duration: 1
-                    });
-                    setLoading(false);
-                    navigate("/admin");
-                } else {
-                    message.open({
-                        key,
-                        type: 'error',
-                        content: "Username or password is incorrect",
-                        duration: 2
-                    });
-                    setLoading(false);
-                }
-            }, 1000);
+            if (form.username === 'vv12' && form.password === '12345678') {
+                localStorage.setItem("token", "admin");
+                message.open({
+                    key,
+                    type: 'success',
+                    content: "Login success",
+                    duration: 1
+                });
+                setLoading(false);
+                navigate("/admin");
+            } else {
+                message.open({
+                    key,
+                    type: 'error',
+                    content: "Username or password is incorrect",
+                    duration: 2
+                });
+                setLoading(false);
+            }
         }, 1000);
     };
 
@@ -48,7 +46,7 @@ export default function SignIn() {
 
     return (
         <center>
-            <Card title="Sign In" style={{ width: 500 }}>
+            <Card title="Sign In" style={{ maxWidth: 500 }}>
                 <Form
                     name="basic"
                     style={{ maxWidth: 300 }}

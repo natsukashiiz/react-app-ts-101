@@ -14,6 +14,9 @@ interface ISignIn {
   password: string;
 }
 
+interface ISignUp extends ISignIn {
+  repassword: string;
+}
 interface IBlog {
   id: number;
   title: string;
